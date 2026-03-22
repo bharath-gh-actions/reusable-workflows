@@ -18,7 +18,7 @@ on:
     #     required: true
 jobs:
   ci: # job-name
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64]
     # outputs:
     #   appVersion: ${{ steps.package-version.outputs.version }}
     steps:
