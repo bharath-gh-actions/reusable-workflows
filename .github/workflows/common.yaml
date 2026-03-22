@@ -19,8 +19,8 @@ on:
 jobs:
   ci: # job-name
     runs-on: [self-hosted, Linux, X64]
-    # outputs:
-    #   appVersion: ${{ steps.package-version.outputs.version }}
+    outputs:
+      appVersion: ${{ steps.package-version.outputs.version }}
     steps:
     - name: checkout Code
       uses: actions/checkout@v5
@@ -28,11 +28,11 @@ jobs:
       run: ls -l
     - name: print inputs
       run: echo "Project is ${{ inputs.project }}"
-  #   - name: Get app version
-  #     id: package-version
-  #     run: echo "version=$(jq -r '.version' package.json)" >> "$GITHUB_OUTPUT"
-  #   - name: print app version
-  #     run: echo ${{ steps.package-version.outputs.version }}
+    - name: Get app version
+      id: package-version
+      run: echo "version=$(jq -r '.version' package.json)" >> "$GITHUB_OUTPUT"
+    - name: print app version
+      run: echo ${{ steps.package-version.outputs.version }}
   #   - name: install dependencies
   #     run: npm install
   #   - name: docker build
