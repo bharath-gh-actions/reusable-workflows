@@ -11,11 +11,11 @@ on:
       app_type:
         required: true
         type: string
-    # secrets:
-    #   AWS_ACCESS_KEY_ID:
-    #     required: true
-    #   AWS_SECRET_ACCESS_KEY:
-    #     required: true
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
 jobs:
   ci: # job-name
     runs-on: [self-hosted, Linux, X64]
@@ -37,12 +37,12 @@ jobs:
       run: npm install
     - name: docker build
       run: docker build -t 334864977755.dkr.ecr.us-east-1.amazonaws.com/${{ inputs.project }}/${{ inputs.component }}:${{ steps.package-version.outputs.version }} .
-  #   - name: Configure AWS Credentials
-  #     uses: aws-actions/configure-aws-credentials@v5.0.0
-  #     with:
-  #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #       aws-region: us-east-1
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v5.0.0
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
   #   - name: push the image to ECR
   #     run: |
   #       aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 160885265516.dkr.ecr.us-east-1.amazonaws.com
