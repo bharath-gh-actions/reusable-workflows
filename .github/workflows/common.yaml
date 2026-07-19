@@ -60,7 +60,7 @@ jobs:
           repository: bharath-gh-actions/catalogue-github-actions-deploy
       - name: check the files
         run: ls -l
-      - name: Configure AWS Credentials
+      # - name: Configure AWS Credentials
       #   uses: aws-actions/configure-aws-credentials@v5.0.0
       #   with:
       #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
